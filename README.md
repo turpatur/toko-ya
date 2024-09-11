@@ -1,5 +1,5 @@
 # Tugas 1 PBP
-## 
+## http://fathurrahman-kesuma-tokoya2.pbp.cs.ui.ac.id
 1. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).<br>
 - Membuat sebuah proyek Django baru. \
   Saya membuat project baru dengan membuat directory baru `toko-ya`, di dalam direktorinya saya buat virtual environment dengan `python -m venv env`, lalu menjalankan virtual environment dengan `env\Scripts\activate`. Setelah itu, saya menginstall dependencies yang terdapat pada `requirements.txt` dengan `pip install -r requirements.txt`. Kemudian, saya menjalankan perintah `djangoadmin startproject toko_ya .` untuk inisiasi project django

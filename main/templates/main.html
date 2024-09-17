@@ -1,5 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
 <h1>{{ title }} </h1>
 <h5>Nama: </h5>
 <p>{{ name }}<p>
 <h5>Kelas: </h5>
 <p>{{ class }}<p>
+
+{% if not item_entries %}
+<p>Belum ada data item pada Toko-ya.</p>
+{% else %}
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Price</th>
+    <th>Stock</th>
+  </tr>
+
+  {% comment %} Berikut cara memperlihatkan data item di bawah baris ini 
+  {% endcomment %} 
+  {% for item_entry in item_entries %}
+  <tr>
+    <td>{{item_entry.name}}</td>
+    <td>{{item_entry.description}}</td>
+    <td>{{item_entry.price}}</td>
+    <td>{{item_entry.stock}}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endif %}
+
+<br />
+
+<a href="{% url 'main:create_item_entry' %}">
+  <button>Add New Item Entry</button>
+</a>
+{% endblock content %}

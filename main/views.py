@@ -23,7 +23,6 @@ def show_main(request):
         'item_entries' : item_entries,
         'last_login': request.COOKIES['last_login'],
     }
-
     return render(request, "main.html", context)
 
 def create_item_entry(request):

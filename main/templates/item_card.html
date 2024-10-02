@@ -1,0 +1,16 @@
+<div class="card border rounded-lg shadow-lg bg-white p-4">
+    <div class="card-body">
+        <h2 class="card-title text-xl font-bold mb-2">{{ item_entry.name }}</h2>
+        <p class="mb-2"><strong>Description:</strong> {{ item_entry.description }}</p>
+        <p class="mb-2"><strong>Price:</strong> {{ item_entry.price }}</p>
+        <p class="mb-2"><strong>Stock:</strong> {{ item_entry.stock }}</p>
+        <div class="card-actions flex space-x-2 mt-4">
+            <a href="{% url 'main:edit_item' item_entry.pk %}">
+                <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-3 rounded">Edit</button>
+            </a>
+            <a href="{% url 'main:delete_item' item_entry.pk %}">
+                <button class="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-3 rounded">Delete</button>
+            </a>
+        </div>
+    </div>
+</div>

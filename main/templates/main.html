@@ -1,45 +1,44 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>{{ title }} </h1>
-<h5>Nama: </h5>
-<p>{{ name }}<p>
-<h5>Kelas: </h5>
-<p>{{ class }}<p>
+{% include 'navbar.html' %}
+{% load static %}
 
-{% if not item_entries %}
-<p>Belum ada data item pada Toko-ya.</p>
-{% else %}
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Description</th>
-    <th>Price</th>
-    <th>Stock</th>
-  </tr>
+<div class="container mx-auto p-4 mt-16">    
+    {% if not item_entries %}
+    <div class="flex flex-col items-center justify-center min-h-[24rem] p-6">
+        <img src="{% static 'image/sadge.png' %}" alt="Sad face" class="w-32 h-32 mb-4"/>
+        <p class="text-center text-gray-600 mt-4">Belum ada data item pada Toko-ya.</p>
+    </div>
+    {% else %}
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {% for item_entry in item_entries %}
+                {% include 'item_card.html' %}
+            {% endfor %}
+        </div>
+    {% endif %}
 
-  {% comment %} Berikut cara memperlihatkan data item di bawah baris ini 
-  {% endcomment %} 
-  {% for item_entry in item_entries %}
-  <tr>
-    <td>{{item_entry.name}}</td>
-    <td>{{item_entry.description}}</td>
-    <td>{{item_entry.price}}</td>
-    <td>{{item_entry.stock}}</td>
-  </tr>
-  {% endfor %}
-</table>
-{% endif %}
+    <!-- Buttons for Add and Logout -->
+    <div class="mt-4">
+        <a href="{% url 'main:create_item_entry' %}">
+            <button class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">Add New Item Entry</button>
+        </a>
+        <a href="{% url 'main:logout' %}" class="ml-2">
+            <button class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">Logout</button>
+        </a>
+    </div>
 
-<br />
-
-<a href="{% url 'main:create_item_entry' %}">
-  <button>Add New Item Entry</button>
-</a>
-
-<a href="{% url 'main:logout' %}">
-  <button>Logout</button>
-</a>
-
-<h5>Sesi terakhir login: {{ last_login }}</h5>
+    <!-- User Information Section -->
+    <div class="flex items-center mt-6">
+        <div class="mr-6">
+            <h5 class="text-sm text-gray-600 font-medium">Nama: {{ name }}</h5>
+        </div>
+        
+        <div class="mr-6">
+            <h5 class="text-sm text-gray-600 font-medium">Kelas: {{class}}</h5>
+        </div>
+        
+        <h5 class="text-sm text-gray-600 font-medium">Sesi terakhir login: {{ last_login }}</h5>
+    </div>
+</div>
 
 {% endblock content %}

@@ -1,18 +1,26 @@
 {% extends 'base.html' %} 
+{% load static %}  <!-- Load static files -->
 {% block content %}
-<h1>Add New Item Entry</h1>
+{% include 'navbar.html' %}
 
-<form method="POST">
-  {% csrf_token %}
-  <table>
-    {{ form.as_table }}
-    <tr>
-      <td></td>
-      <td>
-        <input type="submit" value="Add Item Entry" />
-      </td>
-    </tr>
-  </table>
-</form>
+<!-- Add top margin to avoid navbar overlay -->
+<div class="mt-20 max-w-xl mx-auto form-style">
+  <h1 class="text-3xl font-bold text-center mb-6">Add New Item Entry</h1>
+
+  <form method="POST" enctype="multipart/form-data" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+    {% csrf_token %}
+    
+    <table class="w-full">
+      {{ form.as_p }}
+    </table>
+
+    <!-- Submit Button -->
+    <div class="flex justify-center mt-6">
+      <input type="submit" value="Add Item Entry" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded cursor-pointer transition duration-300 animate-shine" />
+    </div>
+  </form>
+
+<!-- Link to the global.css file -->
+<link rel="stylesheet" href="{% static 'css/global.css' %}">
 
 {% endblock %}

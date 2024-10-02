@@ -1,0 +1,21 @@
+.form-style form input, 
+.form-style form textarea, 
+.form-style form select {
+    width: 100%;
+    padding: 0.5rem;
+    border: 2px solid #bcbcbc;
+    border-radius: 0.375rem; /* Tailwind's rounded-md equivalent */
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-style form input:focus, 
+.form-style form textarea:focus, 
+.form-style form select:focus {
+    outline: none;
+    border-color: #bcbcbc; /* Border color on focus */
+    box-shadow: 0 0 0 3px #bcbcbc; /* Glow effect on focus */
+}
+
+.bg-offwhite {
+    background-color: #f8f8f8; /* Adjust color to your liking */
+}

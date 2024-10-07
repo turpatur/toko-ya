@@ -52,10 +52,10 @@ Past Works :
      - Buat function pada views
        ```python
        def edit_item(request, id):
-            # Get mood entry berdasarkan id
+            # Get Item entry berdasarkan id
             item = ItemEntry.objects.get(pk = id)
         
-            # Set mood entry sebagai instance dari form
+            # Set Item entry sebagai instance dari form
             form = ItemEntryForm(request.POST or None, instance=item)
         
             if form.is_valid() and request.method == "POST":

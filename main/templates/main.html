@@ -26,29 +26,30 @@
             </div>
             <!-- Modal body -->
             <div class="px-6 py-4 space-y-6 form-style">
+                <div id="errorMessages" class="text-red-600"></div> <!-- Error message container -->
                 <form id="ItemEntryForm">
                     <div class="mb-4">
                         <label for="name" class="block text-sm font-medium text-gray-700">Item Name</label>
-                        <input type="text" id="name" name="name" class="mt-1 block w-full border border-gray-300 rounded-md p-2 hover:border-indigo-700" placeholder="Enter the item name" required>
+                        <input type="text" id="name" name="name" class="mt-1 block w-full border border-gray-300 rounded-md p-2 hover:border-gray-700" placeholder="Enter the item name" required>
                     </div>
                     <div class="mb-4">
                         <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
-                        <textarea id="description" name="description" rows="3" class="mt-1 block w-full h-52 resize-none border border-gray-300 rounded-md p-2 hover:border-indigo-700" placeholder="Describe the item" required></textarea>
+                        <textarea id="description" name="description" rows="3" class="mt-1 block w-full h-52 resize-none border border-gray-300 rounded-md p-2 hover:border-gray-700" placeholder="Describe the item" required></textarea>
                     </div>
                     <div class="mb-4">
                         <label for="price" class="block text-sm font-medium text-gray-700">Price</label>
-                        <input type="number" id="price" name="price" min="0" class="mt-1 block w-full border border-gray-300 rounded-md p-2 hover:border-indigo-700" placeholder="Enter the price" required>
+                        <input type="number" id="price" name="price" min="0" class="mt-1 block w-full border border-gray-300 rounded-md p-2 hover:border-gray-700" placeholder="Enter the price" required>
                     </div>
                     <div class="mb-4">
                         <label for="stock" class="block text-sm font-medium text-gray-700">Stock</label>
-                        <input type="number" id="stock" name="stock" min="0" class="mt-1 block w-full border border-gray-300 rounded-md p-2 hover:border-indigo-700" placeholder="Enter the stock" required>
+                        <input type="number" id="stock" name="stock" min="0" class="mt-1 block w-full border border-gray-300 rounded-md p-2 hover:border-gray-700" placeholder="Enter the stock" required>
                     </div>
                 </form>
             </div>
             <!-- Modal footer -->
             <div class="flex flex-col space-y-2 md:flex-row md:space-y-0 md:space-x-2 p-6 border-t border-gray-200 rounded-b justify-center md:justify-end">
                 <button type="button" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-lg" id="cancelButton">Cancel</button>
-                <button type="submit" id="submitItemEntry" form="ItemEntryForm" class="bg-indigo-700 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg">Save</button>
+                <button type="submit" id="submitItemEntry" form="ItemEntryForm" class="bg-blue-700 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg">Save</button>
             </div>
         </div>
     </div>
@@ -80,18 +81,20 @@
 </div>
 
 <script>
+    
   function addItemEntry() {
     fetch("{% url 'main:add_item_entry_ajax' %}", {
       method: "POST",
       body: new FormData(document.querySelector('#ItemEntryForm')),
     })
-    .then(response => refreshItemEntries())
-
+    .then(response => hideModal())
+    refreshItemEntries()
     document.getElementById("ItemEntryForm").reset(); 
     document.querySelector("[data-modal-toggle='crudModal']").click();
 
     return false;
   }
+
     
     async function getItemEntries(){
       return fetch("{% url 'main:show_json' %}").then((res) => res.json())
